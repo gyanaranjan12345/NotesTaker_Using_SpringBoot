@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		<div class="container p-5">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card paint-card">
+						<div class="card-body">
+							<form th:action="@{/saveUser}" method="post">
+
+								<p class="fs-4 text-center">View Profile</p>
+
+								<div class="form-group mt-2">
+									<label> Name</label> <input type="text" name="name"
+										th:value="${user.name}" readonly class="form-control"
+										required="required">
+
+								</div>
+
+								<div class="form-group mt-2">
+									<label> Email</label> <input type="email" name="email"
+										th:value="${user.email}" readonly class="form-control"
+										required="required">
+								</div>
+
+								<div class="form-group mt-2">
+									<textarea rows="3" cols="" class="form-control" name="about"
+										th:value="${user.about}" readonly placeholder="Enter About">[[${user.about}]]</textarea>
+								</div>
+
+
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card paint-card">
+						<div class="card-body">
+							<form th:action="@{/user/updateUser}" method="post">
+
+								<p class="fs-4 text-center">Edit Profile</p>
+								<div th:if="${session.msg}" class="text-center" role="alert">
+
+									<h4 class="text-success" th:text="${session.msg}"></h4>
+									<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+								</div>
+
+								<div class="form-group mt-2">
+									<label>Enter Name</label> <input type="text" name="name"
+										th:value="${user.name}" class="form-control"
+										required="required">
+
+								</div>
+
+								<div class="form-group mt-2">
+									<label>Enter Email</label> <input type="email" name="email"
+										th:value="${user.email}" readonly class="form-control"
+										required="required">
+								</div>
+
+
+								<div class="form-group mt-2">
+									<textarea rows="3" cols="" class="form-control" name="about"
+										placeholder="Enter About">[[${user.about}]]</textarea>
+								</div>
+								<input type="hidden" name="id" th:value="${user.id}">
+
+
+								<div class="text-center mt-3">
+									<button class="btn bg-primary text-white">Update</button>
+									<button type="reset" class="btn btn-primary text-white">Reset</button>
+								</div>
+
+
+
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
+</body>
+</html>
